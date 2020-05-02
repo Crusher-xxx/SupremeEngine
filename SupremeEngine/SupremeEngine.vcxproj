@@ -177,9 +177,6 @@
     <None Include="..\Shaders\fragment2.glsl" />
     <None Include="..\Shaders\vertex.glsl" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\NEW.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
