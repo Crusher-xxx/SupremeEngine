@@ -79,4 +79,7 @@
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\NEW.txt" />
+  </ItemGroup>
 </Project>
