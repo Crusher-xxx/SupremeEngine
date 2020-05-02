@@ -9,4 +9,4 @@ Project configuration
 
 	|Linker — Input — Additional Dependencies| should have |glfw3.lib| and |opengl32.lib|.
 
-	Don't forget to add |glad.c| and |stb.cpp| to the progect.
+Don't forget to add |glad.c| and |stb.cpp| to the progect.
