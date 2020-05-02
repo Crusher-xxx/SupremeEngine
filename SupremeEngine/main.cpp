@@ -21,7 +21,7 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(800, 600, "Supreme Engine", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -104,7 +104,6 @@ int main()
 	glUniform1i(glGetUniformLocation(programs[0].ID, "ourTexture2"), 1);
 	//programs[0].set_uniform("ourTexture2", std::vector<float>{1}); // doesn't work because of float
 
-
 	main_loop(window, VAO, programs);
 
 
@@ -134,15 +133,32 @@ void processInput(GLFWwindow* window)
 		glfwSetWindowShouldClose(window, true);
 }
 
+void process(GLFWwindow* window, float& k)
+{
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		k += 0.01;
+	else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		k -= 0.01;
+
+	if (k >= 1)
+		k = 1;
+	if (k <= 0)
+		k = 0;
+}
+
 void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>& programs)
 {
 	// Drawing mode
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-
+	float k{ 0.5 };
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
+
+		
+		process(window, k);
+		programs[0].set_uniform("k", std::vector<float>{k});
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
