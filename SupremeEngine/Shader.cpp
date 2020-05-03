@@ -1,8 +1,8 @@
 #include "Shader.h"
-#include<fstream>
-#include"Logger.h"
-#include<glad/glad.h>
-#include<iostream>
+#include <fstream>
+#include "Logger.h"
+#include <glad/glad.h>
+#include <iostream>
 
 std::string Shader::read(const std::string& path)
 {
@@ -13,22 +13,23 @@ std::string Shader::read(const std::string& path)
 		print_log_message("Failed to open file " + path);
 	}
 
+	// Iterate throughout file and construct string with shader source code
 	std::string shader{ std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
 	return shader;
 }
 
-bool Shader::check(const unsigned int shader)
+bool Shader::check() const
 {
 	char shaderLog[2048];
-	glGetShaderSource(shader, 2048, NULL, shaderLog);
+	glGetShaderSource(ID, 2048, NULL, shaderLog);
 	print_log_message("SHADER", 1);
 	std::clog << shaderLog << '\n';
 
 	int  success;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+	glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
-		glGetShaderInfoLog(shader, 2048, NULL, shaderLog);
+		glGetShaderInfoLog(ID, 2048, NULL, shaderLog);
 		std::clog << shaderLog << '\n';
 		print_log_message("COMPILATION_FAILED");
 		return false;
@@ -56,7 +57,7 @@ unsigned int Shader::create(unsigned int type, const std::string& shader_source)
 
 Shader::Shader(unsigned int type, const std::string& path) : ID{ create(type, read(path)) }
 {
-	check(ID);
+	check();
 }
 
 Shader::~Shader()

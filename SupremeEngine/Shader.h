@@ -1,5 +1,5 @@
 #pragma once
-#include<string>
+#include <string>
 
 class Shader
 {
@@ -8,8 +8,10 @@ public:
 	Shader(const unsigned int type, const std::string& path);
 	~Shader();
 private:
+	// Returns shader source code as string from file
 	static std::string read(const std::string& path);
-	static bool check(const unsigned int shader);
+	// Check if shader compiles
+	bool check() const;
 	static unsigned int create(const unsigned int type, const std::string& shader_source);
 };
 

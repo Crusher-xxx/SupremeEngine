@@ -2,11 +2,11 @@ Project configuration
 	Dont't forget to set |Configuration — All and |Platform — All|
 
 	|C/C++ — General — Additional Include Directories| should have |$(SolutionDir)OpenGL_Dependencies\Dependencies\Include|.
-	This is the path to glad, GLFW, KHR headers.
+	This is the path to glad, GLFW, KHR, glm headers.
 
 	|Linker — General — Additional Library Directories| should have |$(SolutionDir)OpenGL_Dependencies\Dependencies\Library|.
 	This is the path to glfw3.lib.
 
 	|Linker — Input — Additional Dependencies| should have |glfw3.lib| and |opengl32.lib|.
 
-	Don't forget to add |glad.c| and |stb.cpp| to the progect.
+Don't forget to add |glad.c| and |stb.cpp| to the progect.

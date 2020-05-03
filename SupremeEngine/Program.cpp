@@ -1,19 +1,20 @@
 #include "Program.h"
-#include<fstream>
-#include"Logger.h"
-#include<glad/glad.h>
-#include<iostream>
-#include<vector>
-#include<sstream>
+#include <fstream>
+#include "Logger.h"
+#include <glad/glad.h>
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <glm/gtc/type_ptr.hpp>
 
-bool Program::check(const unsigned int program)
+bool Program::check() const
 {
 	int  success;
 	char infoLog[512];
-	glGetProgramiv(program, GL_LINK_STATUS, &success);
+	glGetProgramiv(ID, GL_LINK_STATUS, &success);
 	if (!success)
 	{
-		glGetProgramInfoLog(program, 512, NULL, infoLog);
+		glGetProgramInfoLog(ID, 512, NULL, infoLog);
 		std::clog << infoLog << '\n';
 		print_log_message("LINKING FAILED");
 		return false;
@@ -34,7 +35,7 @@ Program::Program(const std::string& vertex_path, const std::string& fragment_pat
 	glAttachShader(ID, fragment_shader.ID);
 	glLinkProgram(ID);
 
-	check(ID);
+	check();
 }
 
 void Program::use() const
@@ -47,25 +48,36 @@ void Program::delete_program()
 	glDeleteProgram(ID);
 }
 
-
-void Program::set_uniform (const std::string& name, const std::vector<float>& values) const
+void Program::set_uniform(const std::string& name, const float value) const
 {
 	int location{ glGetUniformLocation(ID, name.c_str()) };
+	check_uniform_location(location, name); 
+
+	glUniform1f(location, value);
+}
+
+void Program::set_uniform(const std::string& name, const glm::mat4& transform) const
+{
+	int location{ glGetUniformLocation(ID, name.c_str()) };
+	check_uniform_location(location, name);
+
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(transform));
+}
+
+void Program::set_uniform(const std::string& name, const int value) const
+{
+	int location{ glGetUniformLocation(ID, name.c_str()) };
+	check_uniform_location(location, name);
+
+	glUniform1i(location, value);
+}
+
+bool Program::check_uniform_location(const unsigned int location, const std::string& name)
+{
 	if (location == -1)
 	{
 		print_log_message("UNIFORM LOCATION NOT FOUND: " + name);
+		return false;
 	}
-
-	switch (values.size())
-	{
-	case 1:
-		glUniform1f(location, values[0]);
-		break;
-	case 4:
-		glUniform4f(location, values[0], values[1], values[2], values[3]);
-		break;
-	default:
-		print_log_message("UNSUPPORTED UNIFORM FOR SIZE OF: " + std::to_string(values.size()));
-		break;
-	}
+	return true;
 }

@@ -1,11 +1,16 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include<iostream>
-#include"Logger.h"
-#include<vector>
-#include"Program.h"
-#include"Texture.h"
+#include <iostream>
+#include "Logger.h"
+#include <vector>
+#include "Program.h"
+#include "Texture.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
@@ -21,7 +26,7 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(800, 600, "Supreme Engine", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -57,12 +62,6 @@ int main()
 		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 	};
 
-	float first_triangle[] = {
-		// positions         // colors
-		 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
-	};
 	unsigned int indices[] = {  // note that we start from 0!
 		0, 1, 3,   // first triangle
 		1, 2, 3,   // second triangle
@@ -70,18 +69,18 @@ int main()
 
 
 	// create ARRAY
-	unsigned int VAO[2];
-	glGenVertexArrays(2, VAO);
-	glBindVertexArray(VAO[0]);
+	unsigned int VAO;
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
 
 	// create BUFFER
-	unsigned int VBO[2], EBO;
-	glGenBuffers(2, VBO);
+	unsigned int VBO, EBO;
+	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
 
 	// bind BUFFER with TARGET
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	// copy DATA into BUFFER's memory using TARGET
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -104,8 +103,11 @@ int main()
 	glUniform1i(glGetUniformLocation(programs[0].ID, "ourTexture2"), 1);
 	//programs[0].set_uniform("ourTexture2", std::vector<float>{1}); // doesn't work because of float
 
+	
 
-	main_loop(window, VAO, programs);
+
+
+	main_loop(window, &VAO, programs);
 
 
 	glfwTerminate();
@@ -134,15 +136,32 @@ void processInput(GLFWwindow* window)
 		glfwSetWindowShouldClose(window, true);
 }
 
+void process(GLFWwindow* window, float& k)
+{
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		k += 0.01;
+	else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		k -= 0.01;
+
+	if (k >= 1)
+		k = 1;
+	if (k <= 0)
+		k = 0;
+}
+
 void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>& programs)
 {
 	// Drawing mode
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-
+	float k{ 0.5 };
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
+
+		
+		process(window, k);
+		programs[0].set_uniform("k", k);
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -151,6 +170,16 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 		glBindVertexArray(VAO[0]);
 		//programs[0].set_uniform("xoffset", std::vector<float>{0.5});
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
+		//glm test
+		glm::mat4 trans = glm::mat4(1.0f);
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(-1.0, 1.0, 1.0));
+		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+		trans = glm::scale(trans, glm::vec3(1.7, 0.5, 1.0));
+		/*unsigned int transformLoc = glGetUniformLocation(programs[0], "transform");
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));*/
+		programs[0].set_uniform("transform", trans);
 
 
 

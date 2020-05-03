@@ -1,12 +1,10 @@
 #pragma once
-#include<string>
+#include <string>
 
 class Texture
 {
 public:
 	unsigned int ID;
 	Texture(const std::string& path, unsigned int texture_index);
-
 private:
-
 };

@@ -1,6 +1,6 @@
 #pragma once
 
-#include<string>
+#include <string>
 
 void print_log_message(std::string message, unsigned int newlines = 3);
 

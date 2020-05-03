@@ -1,8 +1,8 @@
-#include"Texture.h"
-#include<glad/glad.h>
+#include "Texture.h"
+#include <glad/glad.h>
 #include "..\OpenGL_Dependencies\Dependencies\Additonal\stb_image.h"
-#include<iostream>
-#include"Logger.h"
+#include <iostream>
+#include "Logger.h"
 
 
 Texture::Texture(const std::string& path, unsigned int texture_index)
