@@ -62,12 +62,6 @@ int main()
 		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
 	};
 
-	float first_triangle[] = {
-		// positions         // colors
-		 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
-	};
 	unsigned int indices[] = {  // note that we start from 0!
 		0, 1, 3,   // first triangle
 		1, 2, 3,   // second triangle
@@ -75,18 +69,18 @@ int main()
 
 
 	// create ARRAY
-	unsigned int VAO[2];
-	glGenVertexArrays(2, VAO);
-	glBindVertexArray(VAO[0]);
+	unsigned int VAO;
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
 
 	// create BUFFER
-	unsigned int VBO[2], EBO;
-	glGenBuffers(2, VBO);
+	unsigned int VBO, EBO;
+	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
 
 	// bind BUFFER with TARGET
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	// copy DATA into BUFFER's memory using TARGET
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -113,7 +107,7 @@ int main()
 
 
 
-	main_loop(window, VAO, programs);
+	main_loop(window, &VAO, programs);
 
 
 	glfwTerminate();
