@@ -18,18 +18,18 @@ std::string Shader::read(const std::string& path)
 	return shader;
 }
 
-bool Shader::check(const unsigned int shader)
+bool Shader::check() const
 {
 	char shaderLog[2048];
-	glGetShaderSource(shader, 2048, NULL, shaderLog);
+	glGetShaderSource(ID, 2048, NULL, shaderLog);
 	print_log_message("SHADER", 1);
 	std::clog << shaderLog << '\n';
 
 	int  success;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+	glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
-		glGetShaderInfoLog(shader, 2048, NULL, shaderLog);
+		glGetShaderInfoLog(ID, 2048, NULL, shaderLog);
 		std::clog << shaderLog << '\n';
 		print_log_message("COMPILATION_FAILED");
 		return false;
@@ -57,7 +57,7 @@ unsigned int Shader::create(unsigned int type, const std::string& shader_source)
 
 Shader::Shader(unsigned int type, const std::string& path) : ID{ create(type, read(path)) }
 {
-	check(ID);
+	check();
 }
 
 Shader::~Shader()

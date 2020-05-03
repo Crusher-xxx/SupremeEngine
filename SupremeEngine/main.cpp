@@ -167,7 +167,7 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 
 		
 		process(window, k);
-		programs[0].set_uniform_1f("k", k);
+		programs[0].set_uniform("k", k);
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -185,7 +185,7 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 		trans = glm::scale(trans, glm::vec3(1.7, 0.5, 1.0));
 		/*unsigned int transformLoc = glGetUniformLocation(programs[0], "transform");
 		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));*/
-		programs[0].set_uniform_matrix_4fv("transform", trans);
+		programs[0].set_uniform("transform", trans);
 
 
 

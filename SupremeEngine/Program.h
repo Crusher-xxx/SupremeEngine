@@ -15,11 +15,14 @@ public:
 	void use() const;
 	void delete_program();
 	// Send value to shader
-	void set_uniform_1f(const std::string& name, const float value) const;
+	void set_uniform(const std::string& name, const float value) const;
+	void set_uniform(const std::string& name, const int value) const;
 	// Send transformation matrix to shader
-	void set_uniform_matrix_4fv(const std::string& name, const glm::mat4& transform) const;
+	void set_uniform(const std::string& name, const glm::mat4& transform) const;
 private:
 	// Check if program links
-	static bool check(const unsigned int program);
+	bool check() const;
+	// Check if shader sees your uniform
+	static bool check_uniform_location(const unsigned int location, const std::string& name);
 };
 
