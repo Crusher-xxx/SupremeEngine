@@ -109,12 +109,9 @@ int main()
 	glUniform1i(glGetUniformLocation(programs[0].ID, "ourTexture2"), 1);
 	//programs[0].set_uniform("ourTexture2", std::vector<float>{1}); // doesn't work because of float
 
+	
 
-	glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
-	glm::mat4 trans = glm::mat4(1.0f);
-	trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
-	vec = trans * vec;
-	std::cout << vec.x << vec.y << vec.z << std::endl;
+
 
 	main_loop(window, VAO, programs);
 
@@ -170,7 +167,7 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 
 		
 		process(window, k);
-		programs[0].set_uniform("k", std::vector<float>{k});
+		programs[0].set_uniform_1f("k", k);
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -179,6 +176,16 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 		glBindVertexArray(VAO[0]);
 		//programs[0].set_uniform("xoffset", std::vector<float>{0.5});
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
+		//glm test
+		glm::mat4 trans = glm::mat4(1.0f);
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(-1.0, 1.0, 1.0));
+		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+		trans = glm::scale(trans, glm::vec3(1.7, 0.5, 1.0));
+		/*unsigned int transformLoc = glGetUniformLocation(programs[0], "transform");
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));*/
+		programs[0].set_uniform_matrix_4fv("transform", trans);
 
 
 
