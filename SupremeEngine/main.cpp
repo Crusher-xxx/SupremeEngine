@@ -7,6 +7,11 @@
 #include"Program.h"
 #include"Texture.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>& programs);
@@ -103,6 +108,13 @@ int main()
 	glUniform1i(glGetUniformLocation(programs[0].ID, "ourTexture1"), 0);
 	glUniform1i(glGetUniformLocation(programs[0].ID, "ourTexture2"), 1);
 	//programs[0].set_uniform("ourTexture2", std::vector<float>{1}); // doesn't work because of float
+
+
+	glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
+	glm::mat4 trans = glm::mat4(1.0f);
+	trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
+	vec = trans * vec;
+	std::cout << vec.x << vec.y << vec.z << std::endl;
 
 	main_loop(window, VAO, programs);
 
