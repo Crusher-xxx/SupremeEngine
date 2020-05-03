@@ -1,10 +1,11 @@
 #include "Program.h"
-#include<fstream>
-#include"Logger.h"
-#include<glad/glad.h>
-#include<iostream>
-#include<vector>
-#include<sstream>
+#include <fstream>
+#include "Logger.h"
+#include <glad/glad.h>
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <glm/gtc/type_ptr.hpp>
 
 bool Program::check(const unsigned int program)
 {
@@ -48,7 +49,7 @@ void Program::delete_program()
 }
 
 
-void Program::set_uniform (const std::string& name, const std::vector<float>& values) const
+void Program::set_uniform_1f(const std::string& name, const float value) const
 {
 	int location{ glGetUniformLocation(ID, name.c_str()) };
 	if (location == -1)
@@ -56,16 +57,11 @@ void Program::set_uniform (const std::string& name, const std::vector<float>& va
 		print_log_message("UNIFORM LOCATION NOT FOUND: " + name);
 	}
 
-	switch (values.size())
-	{
-	case 1:
-		glUniform1f(location, values[0]);
-		break;
-	case 4:
-		glUniform4f(location, values[0], values[1], values[2], values[3]);
-		break;
-	default:
-		print_log_message("UNSUPPORTED UNIFORM FOR SIZE OF: " + std::to_string(values.size()));
-		break;
-	}
+	glUniform1f(location, value);
+}
+
+void Program::set_uniform_matrix_4fv(const std::string& name, glm::mat4& transform) const
+{
+	unsigned int transform_location = glGetUniformLocation(ID, name.c_str());
+	glUniformMatrix4fv(transform_location, 1, GL_FALSE, glm::value_ptr(transform));
 }
