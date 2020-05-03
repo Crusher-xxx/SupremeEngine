@@ -13,6 +13,7 @@ std::string Shader::read(const std::string& path)
 		print_log_message("Failed to open file " + path);
 	}
 
+	// Iterate throughout file and construct string with shader source code
 	std::string shader{ std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
 	return shader;
 }

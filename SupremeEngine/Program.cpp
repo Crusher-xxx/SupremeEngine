@@ -48,7 +48,6 @@ void Program::delete_program()
 	glDeleteProgram(ID);
 }
 
-
 void Program::set_uniform_1f(const std::string& name, const float value) const
 {
 	int location{ glGetUniformLocation(ID, name.c_str()) };
@@ -60,7 +59,7 @@ void Program::set_uniform_1f(const std::string& name, const float value) const
 	glUniform1f(location, value);
 }
 
-void Program::set_uniform_matrix_4fv(const std::string& name, glm::mat4& transform) const
+void Program::set_uniform_matrix_4fv(const std::string& name, const glm::mat4& transform) const
 {
 	unsigned int transform_location = glGetUniformLocation(ID, name.c_str());
 	glUniformMatrix4fv(transform_location, 1, GL_FALSE, glm::value_ptr(transform));
