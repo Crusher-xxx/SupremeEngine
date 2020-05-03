@@ -7,14 +7,14 @@
 #include <sstream>
 #include <glm/gtc/type_ptr.hpp>
 
-bool Program::check(const unsigned int program)
+bool Program::check() const
 {
 	int  success;
 	char infoLog[512];
-	glGetProgramiv(program, GL_LINK_STATUS, &success);
+	glGetProgramiv(ID, GL_LINK_STATUS, &success);
 	if (!success)
 	{
-		glGetProgramInfoLog(program, 512, NULL, infoLog);
+		glGetProgramInfoLog(ID, 512, NULL, infoLog);
 		std::clog << infoLog << '\n';
 		print_log_message("LINKING FAILED");
 		return false;
@@ -35,7 +35,7 @@ Program::Program(const std::string& vertex_path, const std::string& fragment_pat
 	glAttachShader(ID, fragment_shader.ID);
 	glLinkProgram(ID);
 
-	check(ID);
+	check();
 }
 
 void Program::use() const
@@ -48,19 +48,36 @@ void Program::delete_program()
 	glDeleteProgram(ID);
 }
 
-void Program::set_uniform_1f(const std::string& name, const float value) const
+void Program::set_uniform(const std::string& name, const float value) const
 {
 	int location{ glGetUniformLocation(ID, name.c_str()) };
-	if (location == -1)
-	{
-		print_log_message("UNIFORM LOCATION NOT FOUND: " + name);
-	}
+	check_uniform_location(location, name); 
 
 	glUniform1f(location, value);
 }
 
-void Program::set_uniform_matrix_4fv(const std::string& name, const glm::mat4& transform) const
+void Program::set_uniform(const std::string& name, const glm::mat4& transform) const
 {
-	unsigned int transform_location = glGetUniformLocation(ID, name.c_str());
-	glUniformMatrix4fv(transform_location, 1, GL_FALSE, glm::value_ptr(transform));
+	int location{ glGetUniformLocation(ID, name.c_str()) };
+	check_uniform_location(location, name);
+
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(transform));
+}
+
+void Program::set_uniform(const std::string& name, const int value) const
+{
+	int location{ glGetUniformLocation(ID, name.c_str()) };
+	check_uniform_location(location, name);
+
+	glUniform1i(location, value);
+}
+
+bool Program::check_uniform_location(const unsigned int location, const std::string& name)
+{
+	if (location == -1)
+	{
+		print_log_message("UNIFORM LOCATION NOT FOUND: " + name);
+		return false;
+	}
+	return true;
 }
