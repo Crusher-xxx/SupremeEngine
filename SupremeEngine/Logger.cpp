@@ -1,6 +1,6 @@
-#include"Logger.h"
-#include<string>
-#include<iostream>
+#include "Logger.h"
+#include <string>
+#include <iostream>
 
 
 void print_log_message(std::string message, unsigned int newlines)

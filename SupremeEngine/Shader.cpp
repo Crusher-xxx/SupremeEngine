@@ -1,8 +1,8 @@
 #include "Shader.h"
-#include<fstream>
-#include"Logger.h"
-#include<glad/glad.h>
-#include<iostream>
+#include <fstream>
+#include "Logger.h"
+#include <glad/glad.h>
+#include <iostream>
 
 std::string Shader::read(const std::string& path)
 {
