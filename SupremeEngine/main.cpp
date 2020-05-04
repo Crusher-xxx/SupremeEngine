@@ -163,6 +163,10 @@ void process(GLFWwindow* window, float& k, glm::mat4& trans)
 	k = k > 1 ? 1 : k;
 }
 
+
+
+
+
 void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>& programs)
 {
 	// Drawing mode
@@ -170,6 +174,7 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 
 	float k{ 0.5 };
 	glm::mat4 trans = glm::mat4(1.0f);
+	trans = glm::scale(trans, glm::vec3(2, 0.7, 1.0));
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
@@ -190,9 +195,7 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 		//glm::mat4 trans = glm::mat4(1.0f);
 		//trans = glm::rotate(trans, angle, around);
 		//trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-		//trans = glm::scale(trans, glm::vec3(1.7, 0.5, 1.0));
 		programs[0].set_uniform("transform", trans);
-
 
 
 		glfwSwapBuffers(window);
