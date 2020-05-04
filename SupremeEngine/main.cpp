@@ -136,17 +136,31 @@ void processInput(GLFWwindow* window)
 		glfwSetWindowShouldClose(window, true);
 }
 
-void process(GLFWwindow* window, float& k)
+void process(GLFWwindow* window, float& k, glm::mat4& trans)
 {
+	float angle{ 0.1f };
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
 		k += 0.01;
-	else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		trans = glm::rotate(trans, -angle, glm::vec3(1,0,0));
+	}
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
 		k -= 0.01;
+		trans = glm::rotate(trans, angle, glm::vec3(1, 0, 0));
+	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+	{
+		trans = glm::rotate(trans, angle, glm::vec3(0, 1, 0));
+	}
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+	{
+		trans = glm::rotate(trans, -angle, glm::vec3(0, 1, 0));
+	}
 
-	if (k >= 1)
-		k = 1;
-	if (k <= 0)
-		k = 0;
+
+	k = k < 0 ? 0 : k;
+	k = k > 1 ? 1 : k;
 }
 
 void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>& programs)
@@ -155,12 +169,13 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	float k{ 0.5 };
+	glm::mat4 trans = glm::mat4(1.0f);
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
 
 		
-		process(window, k);
+		process(window, k, trans);
 		programs[0].set_uniform("k", k);
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -172,10 +187,10 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 
 
 		//glm test
-		glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(-1.0, 1.0, 1.0));
-		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-		trans = glm::scale(trans, glm::vec3(1.7, 0.5, 1.0));
+		//glm::mat4 trans = glm::mat4(1.0f);
+		//trans = glm::rotate(trans, angle, around);
+		//trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+		//trans = glm::scale(trans, glm::vec3(1.7, 0.5, 1.0));
 		programs[0].set_uniform("transform", trans);
 
 
