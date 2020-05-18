@@ -6,6 +6,7 @@
 #include <vector>
 #include "Program.h"
 #include "Texture.h"
+#include "Timer.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -25,6 +26,7 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	//glfwWindowHint(GLFW_DOUBLEBUFFER, GL_FALSE); // for uncapped fps
 
 	GLFWwindow* window = glfwCreateWindow(800, 600, "Supreme Engine", NULL, NULL);
 	if (window == NULL)
@@ -177,6 +179,7 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 	trans = glm::scale(trans, glm::vec3(2, 0.7, 1.0));
 	while (!glfwWindowShouldClose(window))
 	{
+		Timer timer;
 		processInput(window);
 
 		
@@ -198,7 +201,9 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 		programs[0].set_uniform("transform", trans);
 
 
+		//glFlush(); // for uncapped fps
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		std::cout << 1000 / timer.get_passed_time() << '\n'; // measure fps
 	}
 }
