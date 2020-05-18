@@ -1,5 +1,5 @@
 Project configuration
-	Dont't forget to set |Configuration — All and |Platform — All|
+	Dont't forget to set |Configuration — All| and |Platform — All|
 
 	|C/C++ — General — Additional Include Directories| should have |$(SolutionDir)OpenGL_Dependencies\Dependencies\Include|.
 	This is the path to glad, GLFW, KHR, glm headers.
