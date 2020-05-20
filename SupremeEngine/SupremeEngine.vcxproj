@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="..\OpenGL_Dependencies\Dependencies\Additonal\glad.c" />
     <ClCompile Include="..\OpenGL_Dependencies\Dependencies\Additonal\stb.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Program.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Shader.h" />
