@@ -51,7 +51,7 @@ void Program::delete_program()
 void Program::set_uniform(const std::string& name, const float value) const
 {
 	int location{ glGetUniformLocation(ID, name.c_str()) };
-	check_uniform_location(location, name); 
+	check_uniform_location(location, name);
 
 	glUniform1f(location, value);
 }

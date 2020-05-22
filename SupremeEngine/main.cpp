@@ -60,48 +60,48 @@ int main()
 
 	// create DATA
 	float vertices[] = {
-			//Vertex coord	Texture coord
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-		
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+		//Vertex coord	Texture coord
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
 
 	unsigned int indices[] = {  // note that we start from 0!
@@ -133,7 +133,7 @@ int main()
 	glEnableVertexAttribArray(1);
 
 
-	
+
 
 	Texture texture1{ "../Resources/Textures/container.jpg", 0 };
 	Texture texture2{ "../Resources/Textures/awesomeface.png", 1 };
@@ -143,7 +143,7 @@ int main()
 	glUniform1i(glGetUniformLocation(programs[0].ID, "ourTexture2"), 1);
 
 	glEnable(GL_DEPTH_TEST);
-	
+
 
 
 
@@ -165,8 +165,7 @@ int main()
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	// Set render area size
-	glViewport(0, 0, width, height);
+	glViewport(0, 0, width, height); // Set render area size
 	print_log_message("Resized to " + std::to_string(width) + 'x' + std::to_string(height), 1);
 }
 
@@ -179,24 +178,24 @@ void processInput(GLFWwindow* window)
 Camera camera;
 void process(GLFWwindow* window, float& k, glm::mat4& trans, float deltaTime)
 {
-	float angle{ 0.1f };
+	float angle{ 1.0f };
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
-		k += 0.01;
-		trans = glm::rotate(trans, -angle, glm::vec3(1,0,0));
+		k += 0.5 * deltaTime;
+		trans = glm::rotate(trans, -angle * deltaTime, glm::vec3(1, 0, 0));
 	}
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 	{
-		k -= 0.01;
-		trans = glm::rotate(trans, angle, glm::vec3(1, 0, 0));
+		k -= 0.5 * deltaTime;
+		trans = glm::rotate(trans, angle * deltaTime, glm::vec3(1, 0, 0));
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 	{
-		trans = glm::rotate(trans, angle, glm::vec3(0, 1, 0));
+		trans = glm::rotate(trans, angle * deltaTime, glm::vec3(0, 1, 0));
 	}
 	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
 	{
-		trans = glm::rotate(trans, -angle, glm::vec3(0, 1, 0));
+		trans = glm::rotate(trans, -angle * deltaTime, glm::vec3(0, 1, 0));
 	}
 
 
@@ -204,15 +203,17 @@ void process(GLFWwindow* window, float& k, glm::mat4& trans, float deltaTime)
 	k = k > 1 ? 1 : k;
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		camera.process_keyboard(Movement_direction::Forward, deltaTime);
+		camera.process_keyboard(Movement_direction::forward, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		camera.process_keyboard(Movement_direction::Backward, deltaTime);
+		camera.process_keyboard(Movement_direction::backward, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camera.process_keyboard(Movement_direction::Left, deltaTime);
+		camera.process_keyboard(Movement_direction::left, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		camera.process_keyboard(Movement_direction::Right, deltaTime);
+		camera.process_keyboard(Movement_direction::right, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		camera.process_keyboard(Movement_direction::Jump, deltaTime);
+		camera.process_keyboard(Movement_direction::up, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+		camera.process_keyboard(Movement_direction::down, deltaTime);
 }
 
 
@@ -232,22 +233,22 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 
 	float k{ 0.5 };
 	glm::mat4 trans = glm::mat4(1.0f);
-	//trans = glm::scale(trans, glm::vec3(2, 0.7, 1.0));
+	//trans = glm::scale(trans, glm::vec3(0.5, 0.5, 1.0));
 
-	
-	
+
+
 
 	float deltaTime = 0.0f;	// Time between current frame and last frame
 	float lastFrame = 0.0f; // Time of last frame
 
-	
+
 
 	while (!glfwWindowShouldClose(window))
 	{
 		Timer timer;
 		processInput(window);
 
-		
+
 		process(window, k, trans, deltaTime);
 		programs[0].set_uniform("k", k);
 
@@ -285,10 +286,11 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 
 
 		view = camera.get_view_matrix();
-		
 
 
-		
+
+
+
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 

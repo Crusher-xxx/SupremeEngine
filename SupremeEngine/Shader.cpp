@@ -13,8 +13,7 @@ std::string Shader::read(const std::string& path)
 		print_log_message("Failed to open file " + path);
 	}
 
-	// Iterate throughout file and construct string with shader source code
-	std::string shader{ std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
+	std::string shader{ std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() }; // Iterate throughout file and construct string with shader source code
 	return shader;
 }
 
@@ -43,14 +42,10 @@ bool Shader::check() const
 
 unsigned int Shader::create(unsigned int type, const std::string& shader_source)
 {
-	// create EMPTY shader object
-	unsigned int shader{ glCreateShader(type) };
-	// make c-string
-	const char* source{ shader_source.c_str() };
-	// replace shader with source
-	glShaderSource(shader, 1, &source, nullptr);
-	// compile and check for errors
-	glCompileShader(shader);
+	unsigned int shader{ glCreateShader(type) }; // create EMPTY shader object
+	const char* const source{ shader_source.c_str() }; // make c-string
+	glShaderSource(shader, 1, &source, nullptr); // INITIALIZE shader with source
+	glCompileShader(shader); // compile and check for errors
 
 	return shader;
 }
