@@ -23,9 +23,9 @@ public:
 private:
 	float last_x{ 400 };
 	float last_y{ 300 };
-	bool first_capture{ true };
 	float pitch{ 0 };
 	float yaw{ -90.0f };
+	bool first_capture{ true };
 
 	glm::vec3 position{ glm::vec3(0.0f, 0.0f, 3.0f) }; // vector in world space that points to the camera's position
 	glm::vec3 front{ glm::vec3(0.0f, 0.0f, -1.0f) }; // vector in world space that points from camera to where it looks
