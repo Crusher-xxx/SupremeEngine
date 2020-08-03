@@ -68,5 +68,5 @@ void Camera::update_camera_vectors()
 
 
 	right = glm::normalize(glm::cross(front, world_up));
-	//up = glm::normalize(glm::cross(right, front)); // update — move in world's up coordinate | no update — move in camera's up coordinate
+	//up = glm::normalize(glm::cross(right, front)); // no update — move in world's up coordinate (FPS camera) | update — move in camera's up coordinate
 }
