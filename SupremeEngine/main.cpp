@@ -14,6 +14,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>& programs);
@@ -51,11 +52,20 @@ int main()
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-
+	// Specify how you run the engine
+	std::string relative_path{ "VS" };
+	if (relative_path == "VS") // from Visual Studio
+	{
+		relative_path = "../";
+	}
+	else if (relative_path == "exe") // from exe
+	{
+		relative_path = "../../";
+	}
 
 
 	std::vector<Program> programs;
-	programs.push_back(Program{ "../Shaders/vertex.glsl", "../Shaders/fragment.glsl" });
+	programs.push_back(Program{ relative_path + "Shaders/vertex.glsl", relative_path + "Shaders/fragment.glsl" });
 
 
 	// create DATA
@@ -135,8 +145,8 @@ int main()
 
 
 
-	Texture texture1{ "../Resources/Textures/container.jpg", 0 };
-	Texture texture2{ "../Resources/Textures/awesomeface.png", 1 };
+	Texture texture1{ relative_path + "Resources/Textures/container.jpg", 0 };
+	Texture texture2{ relative_path + "Resources/Textures/awesomeface.png", 1 };
 
 	programs[0].use();
 	glUniform1i(glGetUniformLocation(programs[0].ID, "ourTexture1"), 0);
