@@ -248,14 +248,13 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 
 
 
-	float deltaTime = 0.0f;	// Time between current frame and last frame
-	float lastFrame = 0.0f; // Time of last frame
+	double deltaTime = 0.0f;	// Time between current frame and last frame
 
 
-
+	Timer timer;
 	while (!glfwWindowShouldClose(window))
 	{
-		Timer timer;
+		timer.reset();
 		processInput(window);
 
 
@@ -325,9 +324,7 @@ void main_loop(GLFWwindow* window, unsigned int* VAO, const std::vector<Program>
 		glFlush(); // for uncapped fps
 		//glfwSwapBuffers(window);
 		glfwPollEvents();
-		std::cout << 1000 / timer.get_passed_time() << '\n'; // measure fps
-		float currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
+		std::cout << timer.get_fps() << '\r'; // measure fps
+		deltaTime = timer.get_delta_time();
 	}
 }
