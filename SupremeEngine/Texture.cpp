@@ -54,3 +54,8 @@ Texture::Texture(const std::string& path, unsigned int texture_index)
 	}
 	stbi_image_free(data);
 }
+
+Texture::~Texture()
+{
+	glDeleteTextures(1, &ID);
+}

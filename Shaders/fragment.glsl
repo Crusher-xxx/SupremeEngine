@@ -2,11 +2,11 @@
 out vec4 FragColor;
 in vec2 TexCoord;
 
-uniform sampler2D ourTexture1;
-uniform sampler2D ourTexture2;
-uniform float k;
+uniform sampler2D crate_texture;
+uniform sampler2D face_texture;
+uniform float mixing_coeff;
 
 void main()
 {
-    FragColor = mix(texture(ourTexture1, TexCoord), texture(ourTexture2, vec2(TexCoord.x, TexCoord.y)), k);
+    FragColor = mix(texture(crate_texture, TexCoord), texture(face_texture, vec2(TexCoord.x, TexCoord.y)), mixing_coeff);
 }
